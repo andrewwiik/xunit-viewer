@@ -6,27 +6,27 @@
     "testOptionsActive": false,
     "propertiesOptionsActive": false,
     "activeFiles": false,
-    "suitesExpanded": true,
+    "suitesExpanded": false,
     "suitesEmpty": true,
     "propertiesExpanded": {
-      "all": true,
-      "suites": true,
-      "tests": true
+      "all": false,
+      "suites": false,
+      "tests": false
     },
     "propertiesVisible": {
-      "all": true,
-      "suites": true,
-      "tests": true
+      "all": false,
+      "suites": false,
+      "tests": false
     },
     "testToggles": {
       "all": {
         "visible": true,
-        "expanded": true,
+        "expanded": false,
         "raw": true
       },
       "passed": {
         "visible": true,
-        "expanded": true,
+        "expanded": false,
         "raw": true
       },
       "failure": {
@@ -36,17 +36,17 @@
       },
       "error": {
         "visible": true,
-        "expanded": true,
+        "expanded": false,
         "raw": true
       },
       "skipped": {
-        "visible": true,
-        "expanded": true,
+        "visible": false,
+        "expanded": false,
         "raw": true
       },
       "unknown": {
         "visible": true,
-        "expanded": true,
+        "expanded": false,
         "raw": true
       }
     }

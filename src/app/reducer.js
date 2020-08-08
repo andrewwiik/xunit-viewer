@@ -36,10 +36,49 @@ export default (state, { type, payload }) => {
     state = merge.recursive(true, {}, state)
     state.suites = payload.suites
     state.currentSuites = payload.suites
+
+    for (let status of ['all', 'passed', 'skipped', 'failure', 'error', 'unknown']) {
+      payload = state.testToggles[status];
+      console.log(payload);
+      Object.values(state.currentSuites).forEach(suite => {
+        Object.values(suite.tests).forEach(test => {
+          if (status === 'all') {
+            test.visible = payload.visible;
+            test.active = payload.expanded;
+            test.raw = payload.raw;
+          }
+          else if (status === test.status) {
+              test.visible = payload.visible;
+              test.active = payload.expanded;
+              test.raw = payload.raw;
+              console.log(payload.status);
+              console.log(test);
+          }
+          else if (typeof test.status === 'undefined' && status === 'unknown') {
+            test.visible = payload.visible;
+            test.active = payload.expanded;
+            test.raw = payload.raw;
+          }
+        })
+      })
+    }
+
+    update.currentSuites = state.currentSuites;
+
+    update = toggleAllProperties(state, { type: 'all', active: false }, update, 'propertiesVisible', '_visible');
+    state = merge.recursive(true, state, update)
+
+    Object.values(state.currentSuites).forEach(suite => { suite.active = state.suitesExpanded })
+    // state = merge.recursive(true, state, update);
+    // console.log(state);
+
+
     Object.values(state.currentSuites).forEach(suite => {
-      if (Object.keys(suite.tests).length > 0 || Object.keys(suite.properties).length > 0) suite.active = true
+      if (!state.suitesEmpty) suite._visible = true
+      else suite._visible = (Object.keys(suite.tests).length > 0 && Object.values(suite.tests).filter(test => test.visible).length > 0) || (suite.properties._visible && Object.keys(suite.properties).filter(prop => prop !== '_visible').length > 0)
     })
-    return state
+
+    return state;
   }
 
   if (type === 'search-suites') {
