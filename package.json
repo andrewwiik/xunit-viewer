@@ -1,13 +1,13 @@
 {
   "name": "xunit-viewer",
-  "version": "6.3.9",
+  "version": "6.4.0",
   "description": "parses xunit xml into xunit viewer",
   "repository": {
-    "url": "https://github.com/lukejpreston/xunit-viewer.git",
+    "url": "https://github.com/andrewwiik/xunit-viewer.git",
     "type": "git"
   },
   "bugs": {
-    "url": "https://github.com/lukejpreston/xunit-viewer.git"
+    "url": "https://github.com/andrewwiik/xunit-viewer.git"
   },
   "homepage": "./",
   "keywords": [
@@ -17,7 +17,7 @@
     "viewer",
     "parser"
   ],
-  "author": "lukejpreston <lukejpreston@gmail.com>",
+  "author": "andrewwiik <wiikfandrew@gmail.com>",
   "license": "MIT",
   "main": "xunit-viewer",
   "bin": {

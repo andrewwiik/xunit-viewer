@@ -2,14 +2,14 @@
 
 set -e
 
-npm run lint
+# npm run lint
 npm run build:cli
-npm run test:ci
+# npm run test:ci
 CURRENT=$(echo $(npm version | grep xunit-viewer | cut -d"'" -f4))
 git commit -am "tested $CURRENT"
 
 npm version ${1-patch}
-npm publish
+# npm publish
 LATEST=$(echo npm version | grep xunit-viewer | cut -d"'" -f4)
 
 npm run release:demo
