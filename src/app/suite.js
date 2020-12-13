@@ -154,13 +154,19 @@ const Suite = ({ visible, id, name, active = false, properties = {}, time, tests
         {hasProperties ? <Properties properties={properties} suite={id} dispatch={dispatch} active={properties._active} /> : null}
         <div>
           {Object.keys(tests)
-            .filter((key) => tests[key].visible && tests[key].status === 'failure')
-            .map(key => <Test key={key} {...tests[key]} suite={id} dispatch={dispatch} />)}
-          {Object.keys(tests)
-            .filter((key) => tests[key].visible && tests[key].status === 'error')
-            .map(key => <Test key={key} {...tests[key]} suite={id} dispatch={dispatch} />)}
-          {Object.keys(tests)
-            .filter((key) => tests[key].visible && tests[key].status === 'passed')
+            .filter((key) => {
+              return tests[key].visible && (tests[key].status === 'passed' || tests[key].status === 'error' || tests[key].status === 'failure')
+            }).sort(function(a,b){
+              try {
+                return new Date(JSON.parse(tests[a].messages[0]).start) - new Date(JSON.parse(tests[b].messages[0]).start);
+
+              } catch (err) {
+                console.error(err);
+                console.error(tests[b].messages[0]);
+                console.error(tests[a].messages[0]);
+                return -1;
+              }
+            })
             .map(key => <Test key={key} {...tests[key]} suite={id} dispatch={dispatch} />)}
           {Object.keys(tests)
             .filter((key) => tests[key].visible && tests[key].status === 'skipped')

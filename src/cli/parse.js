@@ -83,14 +83,17 @@ const extractTestMessages = (test, messages) => {
   })
 }
 
+
 const extractTests = (output, suite, testcases) => {
   suite.tests = suite.tests || {}
+  let counter = 0;
   testcases.forEach(testcase => {
     const meta = testcase.$ || {}
     const name = meta.name || 'No Name'
     const classname = meta.classname || meta.class || ''
     const time = meta.time || 0
-    const id = hashCode(name + classname)
+    const id = hashCode(name + classname + counter);
+    counter++;
 
     const test = suite.tests[id] || { id, name, messages: [], visible: true }
     test.time = time
