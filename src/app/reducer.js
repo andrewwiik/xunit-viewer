@@ -39,7 +39,6 @@ export default (state, { type, payload }) => {
 
     for (let status of ['all', 'passed', 'skipped', 'failure', 'error', 'unknown']) {
       payload = state.testToggles[status];
-      console.log(payload);
       Object.values(state.currentSuites).forEach(suite => {
         Object.values(suite.tests).forEach(test => {
           if (status === 'all') {
@@ -51,8 +50,6 @@ export default (state, { type, payload }) => {
               test.visible = payload.visible;
               test.active = payload.expanded;
               test.raw = payload.raw;
-              console.log(payload.status);
-              console.log(test);
           }
           else if (typeof test.status === 'undefined' && status === 'unknown') {
             test.visible = payload.visible;

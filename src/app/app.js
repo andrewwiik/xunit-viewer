@@ -94,7 +94,22 @@ const App = ({ files, title, brand }) => {
     <main>
       <div className='container'>
         <div>
-          {Object.values(state.currentSuites).map(suite => <Suite key={suite.id} {...suite} visible={suite._visible} dispatch={dispatch} />)}
+          {Object.values(state.currentSuites).sort(function(a,b){
+            try {
+              if ( a.name < b.name ){
+                return -1;
+              }
+              if ( a.name > b.name ){
+                return 1;
+              }
+              return 0;
+
+            } catch (err) {
+              console.error(err);
+              return -1;
+            }
+          })
+            .map(suite => <Suite key={suite.id} {...suite} visible={suite._visible} dispatch={dispatch} />)}
         </div>
       </div>
     </main>
